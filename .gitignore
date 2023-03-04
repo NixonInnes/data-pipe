@@ -1,3 +1,6 @@
+# imported repo
+imports/
+
 # databases
 *.sqlite
 *.sqlite3
