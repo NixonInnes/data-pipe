@@ -17,3 +17,10 @@ class RepoManager:
         repo = Repo(self.repo_path)
         repo.remotes.origin.pull()
         return repo
+
+    def exists(self):
+        return os.path.exists(self.repo_path)
+
+    def delete(self):
+        if os.path.exists(self.repo_path):
+            os.rmdir(self.repo_path)

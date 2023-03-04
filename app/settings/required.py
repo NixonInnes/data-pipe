@@ -1,0 +1,8 @@
+required_settings = [
+    "IMPORTS_DIR",
+    "IMPORTS_ADDRESS",
+    "PIPE_INLETS_MODULE",
+    "PIPE_TRANSFORMERS_MODULE",
+    "PIPE_COMBINERS_MODULE",
+    "PIPE_OUTLETS_MODULE",
+]

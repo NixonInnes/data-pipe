@@ -11,7 +11,7 @@ class PipeInlet(BasePipePiece):
 
 def build_inlets():
     return build_pieces_from_module(
-        settings.get("PIPE_INLET_MODULE"),
+        settings["PIPE_INLETS_MODULE"],
         "imported.pipe_inlets",
         "pipe_inlet",
         PipeInlet

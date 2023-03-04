@@ -6,7 +6,7 @@ class BaseConfig:
 
 
 class DevConfig(BaseConfig):
-    pass
+    SETTINGS_DB = os.environ.get("SETTINGS_DB", "sqlite:///dev-settings.sqlite3")
 
 
 class TestConfig(BaseConfig):
