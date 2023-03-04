@@ -1,18 +1,10 @@
-from .combiner import build_combiners
-from .inlet import build_inlets
-from .outlet import build_outlets
-from .transformer import build_transformers
+import os
+from config import config
+
+from .settings import SettingsManager
 
 
-class PipePieces:
-    combiners: dict = {}
-    inlets: dict = {}
-    outlets: dict = {}
-    transformers: dict = {}
+Config = config.get(os.environ.get("ENV", "dev"))
 
-    @classmethod
-    def update(cls):
-        cls.combiners.update(build_combiners())
-        cls.inlets.update(build_inlets())
-        cls.outlets.update(build_outlets())
-        cls.transformers.update(build_transformers())
+settings = SettingsManager(Config.SETTINGS_DB)
+
