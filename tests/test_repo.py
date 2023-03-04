@@ -6,6 +6,7 @@ from app import PipePieces, repo_manager
 Config.GIT_DIR = "tests/imports"
 Config.refresh_modules()
 
+
 def clean_repo():
     if os.path.exists(Config.GIT_DIR):
         os.system(f"rm -rf {Config.GIT_DIR}")

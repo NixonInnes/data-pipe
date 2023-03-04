@@ -1,6 +1,7 @@
 import yaml
 import importlib.util
 
+
 def is_truthy(value):
     return value.lower() in ("true", "yes", "1", "on")
 
@@ -15,8 +16,8 @@ def load_module_from_file(filename, module_name):
 def camelcase(string):
     return "".join(
         [
-            word.capitalize() if not all([char.isupper() for char in word]) else word 
-            for word in string.split('_')
+            word.capitalize() if not all([char.isupper() for char in word]) else word
+            for word in string.split("_")
         ]
     )
 
@@ -24,7 +25,7 @@ def camelcase(string):
 def load_settings_from_yaml(filepath):
     from app import settings
 
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         loaded = yaml.load(f, Loader=yaml.FullLoader)
     for key, value in loaded.items():
         settings.set(key, value)

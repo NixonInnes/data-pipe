@@ -15,5 +15,5 @@ def build_transformers():
         settings["PIPE_TRANSFORMERS_MODULE"],
         "imported.pipe_transformers",
         "pipe_transformer",
-        PipeTransformer
+        PipeTransformer,
     )

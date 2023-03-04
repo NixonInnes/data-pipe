@@ -5,6 +5,7 @@ from app import PipePieces, repo_manager
 
 PipePieces.update()
 
+
 def test_PipeInletCSV():
     PipeInletCSV = PipePieces.inlets.get("PipeInletCsv")
     assert PipeInletCSV is not None

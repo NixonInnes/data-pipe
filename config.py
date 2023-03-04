@@ -16,6 +16,7 @@ class TestConfig(BaseConfig):
 class ProdConfig(BaseConfig):
     pass
 
+
 config = {
     "dev": DevConfig,
     "test": TestConfig,

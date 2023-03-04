@@ -9,11 +9,14 @@ from .transformer import PipeTransformer
 
 class Pipe:
     def __init__(
-        self, 
-        inlets: PipeInlet|list[PipeInlet]|tuple[PipeInlet],
-        combiner: PipeCombiner|None = None,
-        transformers: PipeTransformer|list[PipeTransformer]|tuple[PipeTransformer]|None = None,
-        outlets: PipeOutlet|list[PipeOutlet]|tuple[PipeOutlet]|None = None
+        self,
+        inlets: PipeInlet | list[PipeInlet] | tuple[PipeInlet],
+        combiner: PipeCombiner | None = None,
+        transformers: PipeTransformer
+        | list[PipeTransformer]
+        | tuple[PipeTransformer]
+        | None = None,
+        outlets: PipeOutlet | list[PipeOutlet] | tuple[PipeOutlet] | None = None,
     ):
         self.inlets = self.__form_tuple(inlets)
         self.combiner = combiner
@@ -33,12 +36,14 @@ class Pipe:
 
     def __setup_validation(self):
         if self.num_inlets > 2:
-            raise AttributeError(f"Pipes can only support up to two inlets, {self.num_inlets} defined")
+            raise AttributeError(
+                f"Pipes can only support up to two inlets, {self.num_inlets} defined"
+            )
         if self.num_inlets > 1 and self.combiner is None:
             raise AttributeError("Multiple inlets defined with no combiner")
         if self.num_inlets == 1 and self.combiner is not None:
             raise AttributeError("Single inlet defined with combiner")
-        
+
     @cached_property
     def num_inlets(self):
         return len(self.inlets)
@@ -59,7 +64,7 @@ class Pipe:
             return self.outlets[0]
         return self.outlets
 
-    def pull(self) -> DataFrame|tuple:
+    def pull(self) -> DataFrame | tuple:
         return tuple(inlet() for inlet in self.inlets)
 
     def combine(self, left: DataFrame, right: DataFrame) -> DataFrame:
@@ -75,6 +80,6 @@ class Pipe:
     def push(self, df: DataFrame) -> None:
         for outlet in self.outlets:
             outlet(df)
-    
+
     def __repr__(self):
         return f"<{self.__class__.__name__}(inlets={self.inlets}, combiner={self.combiner}, transformers={self.transformers}, outlets={self.outlets})>"

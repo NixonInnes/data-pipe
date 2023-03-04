@@ -14,5 +14,5 @@ def build_outlets():
         settings["PIPE_OUTLETS_MODULE"],
         "imported.pipe_outlets",
         "pipe_outlet",
-        PipeOutlet
+        PipeOutlet,
     )

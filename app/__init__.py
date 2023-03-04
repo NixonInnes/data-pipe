@@ -1,5 +1,6 @@
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ImportError:
     pass
@@ -16,12 +17,13 @@ Config = config.get(os.environ.get("ENV", "dev").lower())
 
 settings = SettingsManager(Config.SETTINGS_DB)
 
+
 def setup_settings():
     from .settings.required import required_settings
-    
-    with open("default-settings.yaml", 'r') as f:
+
+    with open("default-settings.yaml", "r") as f:
         default_settings = yaml.load(f, Loader=yaml.FullLoader)
-    
+
     configured_settings = settings.list()
 
     for setting, value in default_settings.items():

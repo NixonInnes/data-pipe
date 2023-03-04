@@ -3,6 +3,7 @@ from .inlet import build_inlets
 from .outlet import build_outlets
 from .transformer import build_transformers
 
+
 class PipePieces:
     combiners: dict = {}
     inlets: dict = {}

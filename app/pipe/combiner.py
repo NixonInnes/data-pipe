@@ -13,8 +13,8 @@ class PipeCombiner(BasePipePiece):
 
 def build_combiners():
     return build_pieces_from_module(
-        settings["PIPE_COMBINERS_MODULE"], 
-        "imported.pipe_combiners", 
-        "pipe_combiner", 
-        PipeCombiner
+        settings["PIPE_COMBINERS_MODULE"],
+        "imported.pipe_combiners",
+        "pipe_combiner",
+        PipeCombiner,
     )
