@@ -18,6 +18,18 @@ class PipePieces:
         cls.transformers.clear()
 
     @classmethod
+    def load_builtins(cls):
+        from .builtin import inlets, outlets
+        cls.combiners.update({})
+        cls.inlets.update({
+            "PipeInletMemory": inlets.PipeInletMemory,
+        })
+        cls.outlets.update({
+            "PipeOutletMemory": outlets.PipeOutletMemory,
+        })
+        cls.transformers.update({})
+
+    @classmethod
     def update(cls, settings):
         cls.combiners.update(build_combiners(settings))
         cls.inlets.update(build_inlets(settings))

@@ -10,6 +10,7 @@ from config import config
 
 from .settings import SettingsManager
 from .repo_manager import RepoManager
+from .memory import Memory
 
 
 Config = config.get(os.environ.get("ENV", "dev").lower())
