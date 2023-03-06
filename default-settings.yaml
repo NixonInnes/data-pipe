@@ -1,5 +1,5 @@
-IMPORTS_DIR: "imports"
-IMPORTS_ADDRESS: "https://github.com/NixonInnes/data-pipe-defaults.git"
+REPO_PATH: "imports"
+REPO_ADDRESS: "https://github.com/NixonInnes/data-pipe-defaults.git"
 PIPE_COMBINERS_MODULE: "imports/pipe_combiners.py"
 PIPE_INLETS_MODULE: "imports/pipe_inlets.py"
 PIPE_OUTLETS_MODULE: "imports/pipe_outlets.py"

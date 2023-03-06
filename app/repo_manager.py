@@ -1,11 +1,19 @@
 import os
+import shutil
 from git import Repo
 
 
 class RepoManager:
-    def __init__(self, repo_path, repo_url):
-        self.repo_path = repo_path
-        self.repo_url = repo_url
+    def __init__(self, settings):
+        self.settings = settings
+
+    @property
+    def repo_path(self):
+        return self.settings["REPO_PATH"]
+    
+    @property
+    def repo_url(self):
+        return self.settings["REPO_ADDRESS"]
 
     def clone(self):
         if not os.path.exists(self.repo_path):
@@ -23,4 +31,4 @@ class RepoManager:
 
     def delete(self):
         if os.path.exists(self.repo_path):
-            os.rmdir(self.repo_path)
+            shutil.rmtree(self.repo_path)
