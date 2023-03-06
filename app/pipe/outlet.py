@@ -1,6 +1,5 @@
 from pandas import DataFrame
 
-from app import settings
 from .base import BasePipePiece, build_pieces_from_module
 
 
@@ -9,7 +8,7 @@ class PipeOutlet(BasePipePiece):
         self.func(df)
 
 
-def build_outlets():
+def build_outlets(settings):
     return build_pieces_from_module(
         settings["PIPE_OUTLETS_MODULE"],
         "imported.pipe_outlets",

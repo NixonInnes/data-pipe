@@ -1,6 +1,5 @@
 from pandas import DataFrame
 
-from app import settings
 from .base import BasePipePiece, build_pieces_from_module
 
 
@@ -10,7 +9,7 @@ class PipeTransformer(BasePipePiece):
         return self.last
 
 
-def build_transformers():
+def build_transformers(settings):
     return build_pieces_from_module(
         settings["PIPE_TRANSFORMERS_MODULE"],
         "imported.pipe_transformers",

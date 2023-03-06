@@ -1,7 +1,5 @@
 from pandas import DataFrame
 
-from app import utils, settings
-
 from .base import BasePipePiece, build_pieces_from_module
 
 
@@ -11,7 +9,7 @@ class PipeCombiner(BasePipePiece):
         return self.last
 
 
-def build_combiners():
+def build_combiners(settings):
     return build_pieces_from_module(
         settings["PIPE_COMBINERS_MODULE"],
         "imported.pipe_combiners",

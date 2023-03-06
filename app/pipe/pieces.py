@@ -11,8 +11,15 @@ class PipePieces:
     transformers: dict = {}
 
     @classmethod
-    def update(cls):
-        cls.combiners.update(build_combiners())
-        cls.inlets.update(build_inlets())
-        cls.outlets.update(build_outlets())
-        cls.transformers.update(build_transformers())
+    def clear(cls):
+        cls.combiners.clear()
+        cls.inlets.clear()
+        cls.outlets.clear()
+        cls.transformers.clear()
+
+    @classmethod
+    def update(cls, settings):
+        cls.combiners.update(build_combiners(settings))
+        cls.inlets.update(build_inlets(settings))
+        cls.outlets.update(build_outlets(settings))
+        cls.transformers.update(build_transformers(settings))

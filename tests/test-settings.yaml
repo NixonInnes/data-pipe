@@ -1,0 +1,6 @@
+REPO_PATH: "tests/test_imports"
+REPO_ADDRESS: "https://github.com/NixonInnes/data-pipe-defaults.git"
+PIPE_COMBINERS_MODULE: "tests/test_imports/pipe_combiners.py"
+PIPE_INLETS_MODULE: "tests/test_imports/pipe_inlets.py"
+PIPE_OUTLETS_MODULE: "tests/test_imports/pipe_outlets.py"
+PIPE_TRANSFORMERS_MODULE: "tests/test_imports/pipe_transformers.py"
