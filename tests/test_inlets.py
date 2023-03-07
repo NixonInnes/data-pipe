@@ -44,7 +44,6 @@ def test_PipeInletCSV_with_config(test_settings):
 def test_PipeInletMemory(test_settings):
     settings = test_settings
     PipePieces.clear()
-    PipePieces.load_builtins()
     
     PipeInletMemory = PipePieces.inlets.get("PipeInletMemory")
     assert PipeInletMemory is not None
