@@ -3,6 +3,7 @@ import pandas as pd
 from app.pipe import PipePieces
 from app import Memory
 
+
 def test_PipeInletCSV(test_settings):
     settings = test_settings
     PipePieces.clear()
@@ -10,7 +11,7 @@ def test_PipeInletCSV(test_settings):
 
     PipeInletCSV = PipePieces.inlets.get("PipeInletCsv")
     assert PipeInletCSV is not None
-    
+
     p = PipeInletCSV(filename="tests/example.csv")
     df = p()
     assert isinstance(df, pd.DataFrame)
@@ -20,6 +21,7 @@ def test_PipeInletCSV(test_settings):
     assert df["B"].tolist() == [4, 5, 6]
     assert df["C"].tolist() == [7, 8, 9]
 
+
 def test_PipeInletCSV_with_config(test_settings):
     settings = test_settings
     PipePieces.clear()
@@ -27,12 +29,8 @@ def test_PipeInletCSV_with_config(test_settings):
 
     PipeInletCSV = PipePieces.inlets.get("PipeInletCsv")
     assert PipeInletCSV is not None
-    
-    p = PipeInletCSV(
-        filename="tests/example.csv",
-        usecols=["A", "B"],
-        skiprows=[1]
-    )
+
+    p = PipeInletCSV(filename="tests/example.csv", usecols=["A", "B"], skiprows=[1])
     df = p()
     assert isinstance(df, pd.DataFrame)
     assert df.shape == (2, 2)
@@ -41,14 +39,16 @@ def test_PipeInletCSV_with_config(test_settings):
     assert df["B"].tolist() == [5, 6]
 
 
-def test_PipeInletMemory(test_settings):
-    settings = test_settings
+def test_PipeInletMemory():
     PipePieces.clear()
-    
+    PipePieces.update()
+
     PipeInletMemory = PipePieces.inlets.get("PipeInletMemory")
     assert PipeInletMemory is not None
-    
-    Memory.tables["test"] = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]})
+
+    Memory.tables["test"] = pd.DataFrame(
+        {"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]}
+    )
     p = PipeInletMemory(tablename="test")
     df = p()
     assert isinstance(df, pd.DataFrame)

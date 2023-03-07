@@ -51,7 +51,7 @@ class SettingsManager:
             self.session.delete(setting)
             if commit:
                 self.session.commit()
-    
+
     def load_yaml(self, filename: str) -> None:
         with open(filename, "r") as f:
             loaded = yaml.load(f, Loader=yaml.FullLoader)
@@ -67,10 +67,9 @@ class SettingsManager:
         if setting is None:
             raise KeyError(f"Setting {setting_name} not found")
         return setting.value
-    
+
     def __iter__(self):
         return iter(self.all())
-    
+
     def __dict__(self):
         return self.all()
-    

@@ -1,4 +1,4 @@
-__all__ = ['PipeInletMemory']
+__all__ = ["PipeInletMemory"]
 
 import pandas as pd
 from typing import Callable
@@ -6,6 +6,7 @@ from typing import Callable
 from app import Memory
 
 from .. import PipeInlet, PipePieces
+
 
 @PipePieces.register_inlet("PipeInletMemory")
 class PipeInletMemory(PipeInlet):

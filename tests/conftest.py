@@ -17,11 +17,13 @@ def clear_settings(settings):
     SQLBase.metadata.drop_all(settings.session.bind)
     settings.session.close()
 
+
 @pytest.fixture
 def settings():
     settings = SettingsManager("sqlite:///:memory:")
     yield settings
     clear_settings(settings)
+
 
 @pytest.fixture
 def default_settings():
@@ -30,12 +32,14 @@ def default_settings():
     yield settings
     clear_settings(settings)
 
+
 @pytest.fixture
 def test_settings():
     settings = SettingsManager("sqlite:///:memory:")
     settings.load_yaml("tests/test-settings.yaml")
     yield settings
     clear_settings(settings)
+
 
 @pytest.fixture
 def test_settings_and_repo():

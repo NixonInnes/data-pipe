@@ -16,7 +16,7 @@ class BasePipePiece:
     def __init__(self, **config: dict):
         self.config = config
         self.last = None
-        self.func = partial(self._func, **self.config)
+        self.func = partial(self._func, **config)
 
     def __call__(self, *args, **kwargs):
         raise NotImplementedError("BasePipePiece.__call__ must be overridden")

@@ -10,7 +10,7 @@ class RepoManager:
     @property
     def repo_path(self):
         return self.settings["REPO_PATH"]
-    
+
     @property
     def repo_url(self):
         return self.settings["REPO_ADDRESS"]

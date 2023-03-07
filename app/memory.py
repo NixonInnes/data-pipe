@@ -1,4 +1,3 @@
-
 class Memory:
     tables = {}
 
