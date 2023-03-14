@@ -5,12 +5,46 @@ __all__ = [
     "PipeTransformerDivide",
     "PipeTransformerFloorDivide",
     "PipeTransformerPower",
+    "PipeTransformerMath",
 ]
 
 import pandas as pd
 from typing import Any, Callable
 
 from .. import PipeTransformer, PipePieces
+
+
+@PipePieces.register_transformer("PipeTransformerMath")
+class PipeTransformerMath(PipeTransformer):
+    operations = {
+        "add": lambda x, y: x + y,
+        "subtract": lambda x, y: x - y,
+        "multiply": lambda x, y: x * y,
+        "divide": lambda x, y: x / y,
+        "floordiv": lambda x, y: x // y,
+        "power": lambda x, y: x ** y,
+    }
+
+    @staticmethod
+    def math(
+        df: pd.DataFrame,
+        source: str,
+        value: Any,
+        operation: str,
+        result: str | None = None,
+        value_is_column: bool = False,
+    ):
+        if operation not in PipeTransformerMath.operations:
+            raise ValueError(f"Invalid operation: {operation}")
+        
+        if result is None:
+            result = source
+        if value_is_column:
+            value = df[value]
+        df[result] = PipeTransformerMath.operations[operation](df[source], value)
+        return df
+    
+    _func: Callable = math
 
 
 @PipePieces.register_transformer("PipeTransformerAdd")
