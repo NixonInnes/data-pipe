@@ -4,6 +4,8 @@ from .base import BasePipePiece, build_pieces_from_module
 
 
 class PipeTransformer(BasePipePiece):
+    _pieces_attr = "transformers"
+    
     def __call__(self, df: DataFrame) -> DataFrame:
         self.last = self.func(df)
         return self.last

@@ -1,6 +1,7 @@
 import pandas as pd
 
 from app.pipe import PipePieces
+from app.pipe.inlet import PipeInlet
 from app import Memory
 
 
@@ -50,6 +51,25 @@ def test_PipeInletMemory():
         {"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]}
     )
     p = PipeInletMemory(tablename="test")
+    df = p()
+    assert isinstance(df, pd.DataFrame)
+    assert df.shape == (3, 3)
+    assert df.columns.tolist() == ["A", "B", "C"]
+    assert df["A"].tolist() == [1, 2, 3]
+    assert df["B"].tolist() == [4, 5, 6]
+    assert df["C"].tolist() == [7, 8, 9]
+
+def test_PipeInletCSV_from_dict(test_settings):
+    PipePieces.clear()
+    PipePieces.update(test_settings)
+
+    d = {
+        "type": "PipeInletCsv",
+        "config": {"filename": "tests/example.csv"},
+    }
+
+    p = PipeInlet.from_dict(d)
+    assert p is not None
     df = p()
     assert isinstance(df, pd.DataFrame)
     assert df.shape == (3, 3)

@@ -4,6 +4,8 @@ from .base import BasePipePiece, build_pieces_from_module
 
 
 class PipeOutlet(BasePipePiece):
+    _pieces_attr = "outlets"
+    
     def __call__(self, df: DataFrame) -> None:
         self.func(df)
 

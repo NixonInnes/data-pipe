@@ -1,0 +1,27 @@
+test-pipe:
+  inlets:
+    - type: PipeInletCsv
+      config:
+        filename: "tests/example.csv"
+    - type: PipeInletMemory
+      config:
+        tablename: test
+  combiner:
+    type: PipeCombinerJoin
+    config:
+      rsuffix: _r
+  transformers:
+    - type: PipeTransformerMath
+      config:
+        source: A
+        operation: add
+        value: 1
+    - type: PipeTransformerMultiply
+      config:
+        source: B_r
+        value: 2
+        result: 2B_r
+  outlets:
+    - type: PipeOutletMemory
+      config:
+        tablename: test-out

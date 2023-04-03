@@ -2,6 +2,8 @@ from .base import BasePipePiece, build_pieces_from_module
 
 
 class PipeInlet(BasePipePiece):
+    _pieces_attr = "inlets"
+
     def __call__(self):
         self.last = self.func()
         return self.last

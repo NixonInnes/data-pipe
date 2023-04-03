@@ -1,3 +1,4 @@
+import yaml
 from functools import cached_property
 from pandas import DataFrame
 
@@ -24,6 +25,27 @@ class Pipe:
         self.outlets = self.__form_tuple(outlets)
         self.__setup_validation()
 
+    @classmethod
+    def from_dict(cls, pipe_dict: dict):
+        return cls(
+            inlets=tuple(PipeInlet.from_dict(inlet) for inlet in pipe_dict["inlets"]),
+            combiner=PipeCombiner.from_dict(pipe_dict["combiner"]) if "combiner" in pipe_dict else None,
+            transformers=tuple(
+                PipeTransformer.from_dict(transformer) 
+                for transformer in pipe_dict.get("transformers", tuple())
+            ),
+            outlets=tuple(PipeOutlet.from_dict(outlet) for outlet in pipe_dict.get("outlets", tuple()))
+        )
+
+    @classmethod
+    def from_yaml(cls, filename: str):
+        with open(filename, "r") as f:
+            pipes_dict = yaml.safe_load(f)
+        return {
+            pipe_name: cls.from_dict(pipe_dict)
+            for pipe_name, pipe_dict in pipes_dict.items()
+        }
+
     @staticmethod
     def __form_tuple(item):
         if item is None:
@@ -35,6 +57,8 @@ class Pipe:
         return (item,)
 
     def __setup_validation(self):
+        if self.num_inlets == 0:
+            raise AttributeError("Pipes must have at least one inlet")
         if self.num_inlets > 2:
             raise AttributeError(
                 f"Pipes can only support up to two inlets, {self.num_inlets} defined"

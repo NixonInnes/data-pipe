@@ -4,6 +4,8 @@ from .base import BasePipePiece, build_pieces_from_module
 
 
 class PipeCombiner(BasePipePiece):
+    _pieces_attr = "combiners"
+    
     def __call__(self, left: DataFrame, right: DataFrame) -> DataFrame:
         self.last = self.func(left=left, right=right)
         return self.last

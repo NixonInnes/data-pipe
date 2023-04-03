@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Literal, Optional
 from functools import partial
 
 from app import utils
@@ -12,11 +12,23 @@ class BasePipePiece:
     _func: Callable = lambda x: raise_(
         NotImplementedError("BasePipePiece._func must be overridden")
     )
+    _pieces_attr: Optional[Literal["inlets", "combiner", "transformers", "outlets"]] = None
 
     def __init__(self, **config: dict):
         self.config = config
         self.last = None
         self.func = partial(self._func, **config)
+
+    @classmethod
+    def from_dict(cls, dict_: dict):
+        pipe_name = dict_.pop("type")
+        config = dict_.pop("config", {})
+        if cls._pieces_attr is None:
+            raise NotImplementedError(
+                "BasePipePiece._pieces_attr must be overridden"
+            )
+        from app.pipe import PipePieces
+        return getattr(PipePieces, cls._pieces_attr)[pipe_name](**config)
 
     def __call__(self, *args, **kwargs):
         raise NotImplementedError("BasePipePiece.__call__ must be overridden")
